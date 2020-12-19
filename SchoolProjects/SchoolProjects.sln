@@ -1,0 +1,45 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30406.217
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FractalWindow", "Windows\FractalWindow\FractalWindow.csproj", "{8E926563-544E-4D04-A40A-2FCB85000E91}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Windows", "Windows", "{1BE18949-16AE-432C-BFC2-31270DDA3A71}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{6E1D13D3-4014-4CD5-8D88-7266B6AF715B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fractal", "Core\Fractal\Fractal.csproj", "{CC6C6270-6546-436E-8CAE-F0682F925CAF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibrary1", "ClassLibrary1\ClassLibrary1.csproj", "{24BB199F-3F59-4D29-8D5D-D2C5B3D42F64}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8E926563-544E-4D04-A40A-2FCB85000E91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E926563-544E-4D04-A40A-2FCB85000E91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E926563-544E-4D04-A40A-2FCB85000E91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E926563-544E-4D04-A40A-2FCB85000E91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC6C6270-6546-436E-8CAE-F0682F925CAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC6C6270-6546-436E-8CAE-F0682F925CAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC6C6270-6546-436E-8CAE-F0682F925CAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC6C6270-6546-436E-8CAE-F0682F925CAF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24BB199F-3F59-4D29-8D5D-D2C5B3D42F64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24BB199F-3F59-4D29-8D5D-D2C5B3D42F64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24BB199F-3F59-4D29-8D5D-D2C5B3D42F64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24BB199F-3F59-4D29-8D5D-D2C5B3D42F64}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8E926563-544E-4D04-A40A-2FCB85000E91} = {1BE18949-16AE-432C-BFC2-31270DDA3A71}
+		{CC6C6270-6546-436E-8CAE-F0682F925CAF} = {6E1D13D3-4014-4CD5-8D88-7266B6AF715B}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F7F32063-AB5B-4101-A5D7-69D945233417}
+	EndGlobalSection
+EndGlobal
