@@ -1,9 +1,22 @@
-﻿using System;
+﻿using Fractal.Fractals;
+using Fractal.Fractals.LSytemFractals;
+using JetBrains.Annotations;
+using System;
+using System.Collections.Generic;
 
 namespace Fractal
 {
-    public sealed class FractalBuilder : IFractalBuilder
+    public static class FractalBuilder
     {
-        // class to possibility to add another fractals types
+        public static IFractal Get2DLSystemFractal(
+            [NotNull] string startSystemСondition,
+            double rotateAngle,
+            [NotNull] string generativeRules)
+        {
+            return new Fractal2DByLSystem(
+                startSystemСondition: startSystemСondition,
+                rotateAngle: rotateAngle,
+                generativeRules: GenerativeRules.FromString(generativeRules));
+        }
     }
 }
