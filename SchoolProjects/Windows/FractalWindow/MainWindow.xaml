@@ -1,12 +1,56 @@
-﻿<Window x:Class="FractalWindow.MainWindow"
+﻿<Window x:Class="FractalWindow.FractalWindowEvents"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:FractalWindow"
+        xmlns:local="clr-namespace:FractalWindow" 
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800"
+        ResizeMode="CanMinimize">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <StackPanel Grid.Row="0" Name="AppToolBarPanel">
+        </StackPanel>
 
+        <Grid Grid.Row="1" Name="AppMainPanel">
+            <Grid.Resources>
+                <x:Array x:Key="FractalsTypes" Type="sys:String">
+                    <sys:String>2D LSystem Fractal</sys:String>
+                </x:Array>
+            </Grid.Resources>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="200"/>
+            </Grid.ColumnDefinitions>
+
+            <Image Grid.Column="0" Name="FractalImagePanel">
+                <Image.Source>
+                    http://cdn1.iconfinder.com/data/icons/fatcow/16/bullet_blue.png
+                </Image.Source>
+            </Image>
+
+            <Border Grid.Column="1" Width="3" Margin="0, 80" Background="LightGray"/>
+
+            <StackPanel Grid.Column="2" Name="ImageConfigurePanel">
+                <Label Content="_Fractal Type" Target="{Binding ElementName=FractalType}"/>
+                <ComboBox x:Name="FractalType" ItemsSource="{StaticResource FractalsTypes}" IsTextSearchEnabled="True" SelectedIndex="0" Margin="20,0" Background="Silver"/>
+                
+                <!-- Wrap in panel when another fractal tpewill be added-->
+                <Label Content="_System start string" Target="{Binding ElementName=SystemStartString}"/>
+                <TextBox x:Name="SystemStartString" TextWrapping="NoWrap" Margin="20,0" Background="Silver"/>
+                <Label Content="System _rules string" Target="{Binding ElementName=SystemRulestring}"/>
+                <TextBox x:Name="SystemRulestring" TextWrapping="Wrap" Margin="20,0" MinHeight="100" MaxHeight="200" Background="Silver"/>
+                <Label Content="System step _count" Target="{Binding ElementName=SystemStepCount}"/>
+                <xctk:IntegerUpDown x:Name="SystemStepCount" Increment="1" Value="0" Margin="20,0" Background="Silver" Maximum="50" Minimum="0"/>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Window>

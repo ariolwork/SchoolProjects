@@ -18,9 +18,9 @@ namespace FractalWindow
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class FractalWindowEvents : Window
     {
-        public MainWindow()
+        public FractalWindowEvents()
         {
             InitializeComponent();
         }
