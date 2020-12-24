@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FractalWindow.Handlers.Initializers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,16 @@ namespace FractalWindow
         public FractalWindowEvents()
         {
             InitializeComponent();
+            InitEmptyTextBoxHelpValues();
+        }
+        
+        public void InitEmptyTextBoxHelpValues()
+        {
+            new List<KeyValuePair<Control, string>>()
+            {
+                new KeyValuePair<Control, string>(this.SystemStartString, "F+F+F"),
+                new KeyValuePair<Control, string>(this.SystemRulestring, $"F=F+F{Environment.NewLine}       F+=F")
+            }.ForEach(pair => HandlersAppliedAtInitStep.AddEmptyTextBoxInfoMessage(pair.Key, pair.Value));
         }
     }
 }
