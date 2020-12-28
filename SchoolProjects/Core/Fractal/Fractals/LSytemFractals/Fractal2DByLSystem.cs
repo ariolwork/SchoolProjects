@@ -12,7 +12,6 @@ namespace Fractal.Fractals.LSytemFractals
     public sealed class Fractal2DByLSystem : IFractal
     {
         private const double StandartPixeMove = 1000;
-        private const double StandartPixeMaxSize = 10000;
 
         private readonly string _startSystemСondition;
         private readonly double _rotateAngle;
@@ -68,8 +67,7 @@ namespace Fractal.Fractals.LSytemFractals
         {
             var condition = GetNewCondition(stepCount);
             return GeometricExtensions.CenterlizePoints(
-                GetPoints(condition),
-                StandartPixeMaxSize);
+                GetPoints(condition));
         }
 
         [NotNull]
@@ -78,7 +76,7 @@ namespace Fractal.Fractals.LSytemFractals
             var newSystemString = new string(_startSystemСondition);
             for (var step = 0; step < stepCount; step++)
             {
-                _generativeRules.ForEach(rule => newSystemString.Replace(rule.From, rule.To));
+                _generativeRules.ForEach(rule => newSystemString = newSystemString.Replace(rule.From, rule.To));
             }
             return newSystemString;
         }
@@ -103,7 +101,7 @@ namespace Fractal.Fractals.LSytemFractals
                         angle += _rotateAngle;
                         break;
                     default:
-                        currentPoint = GetNextPoint(currentPoint);
+                        currentPoint = GetNextPoint(currentPoint, angle);
                         coordinates.Add(currentPoint);
                         break;
                 }
@@ -113,11 +111,12 @@ namespace Fractal.Fractals.LSytemFractals
         }
 
         private PointF GetNextPoint(
-            PointF previousPoint)
+            PointF previousPoint,
+            double angle)
         {
             var moveVector = new PointF(
-                x: (float)(StandartPixeMove * Math.Cos(_rotateAngle)),
-                y: (float)(StandartPixeMove * Math.Sin(_rotateAngle)));
+                x: (float)(StandartPixeMove * Math.Cos(angle)),
+                y: (float)(StandartPixeMove * Math.Sin(angle)));
 
             return previousPoint.Add(moveVector);
         }

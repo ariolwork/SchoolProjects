@@ -13,7 +13,7 @@ namespace Fractal.Fractals.LSytemFractals
             [NotNull] string from,
             [NotNull] string to)
         {
-            From = From ?? throw new Exception($"NotNull parameter {from} exception");
+            From = from ?? throw new Exception($"NotNull parameter {from} exception");
             To = to ?? throw new Exception($"NotNull parameter {to} exception");
         }
 

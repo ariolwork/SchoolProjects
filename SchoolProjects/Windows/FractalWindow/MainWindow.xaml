@@ -1,12 +1,100 @@
-﻿<Window x:Class="FractalWindow.MainWindow"
+﻿<Window x:Class="FractalWindow.FractalWindowEvents"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:FractalWindow"
+        xmlns:local="clr-namespace:FractalWindow" 
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800"
+        ResizeMode="CanMinimize">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" MaxHeight="40"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
+        <ToolBar Grid.Row="0" Name="AppToolBarPanel" ToolBarTray.IsLocked="True" Background="#E2E1E1">
+            <Menu x:Name="MainMenu">
+                <MenuItem Name="MainMenuSaveButton">
+                    <MenuItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="http://cdn1.iconfinder.com/data/icons/fatcow/16/bullet_blue.png" Stretch="Uniform"/>
+                            <TextBlock Margin="5,0">Save</TextBlock>
+                        </StackPanel>
+                    </MenuItem.Header>
+
+                    <MenuItem Name="SaveImageButton" Header="Save Image"/>
+                    <MenuItem Name="SaveAsFileButton" Header="Save"/>
+
+                </MenuItem>
+
+                <MenuItem Name="OpenFileButton">
+                    <MenuItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="http://cdn1.iconfinder.com/data/icons/fatcow/16/bullet_blue.png" Stretch="Uniform"/>
+                            <TextBlock Margin="5,0">Open</TextBlock>
+                        </StackPanel>
+                    </MenuItem.Header>
+                </MenuItem>
+            </Menu>
+            <Separator Margin="5,4"/>
+        </ToolBar>
+
+        <Grid Grid.Row="1" Name="AppMainPanel">
+            <Grid.Resources>
+                <x:Array x:Key="FractalsTypes" Type="sys:String">
+                    <sys:String>2D LSystem Fractal</sys:String>
+                </x:Array>
+            </Grid.Resources>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="200"/>
+            </Grid.ColumnDefinitions>
+
+            <Image Grid.Column="0" Name="FractalImagePanel" Stretch="Uniform">
+            </Image>
+
+            <Border Grid.Column="1" Width="3" Height="180" Background="#E2E1E1"/>
+
+            <StackPanel Grid.Column="2" Name="FractalConfigurePanel">
+                <Label Content="_Fractal Type" Target="{Binding ElementName=FractalType}"/>
+                <ComboBox x:Name="FractalType" ItemsSource="{StaticResource FractalsTypes}" IsTextSearchEnabled="True" SelectedIndex="0" Margin="20,0" Background="#E2E1E1"/>
+                
+                <!-- Wrap in panel when another fractal tpewill be added-->
+                <Label Content="_System start string" Target="{Binding ElementName=SystemStartString}"/>
+                <TextBox x:Name="SystemStartString" TextWrapping="NoWrap" Margin="20,0" Background="#E2E1E1">
+                    <TextBox.ToolTip>
+                        <StackPanel>
+                            <TextBlock Text="Use current symbols to describestart figure:" FontWeight="Bold"/>
+                            <Border BorderBrush="Silver" BorderThickness="0,1,0,0" Margin="0,8" />
+                            <TextBlock Text="- F - draw line by angle" Margin="10,0"/>
+                            <TextBlock Text="- +/- - rotate at angle from current" Margin="10,0"/>
+                            <Border BorderBrush="Silver" BorderThickness="0,1,0,0" Margin="0,8" />
+                        </StackPanel>
+                    </TextBox.ToolTip>
+                </TextBox>
+
+                <Label Content="System _rules string" Target="{Binding ElementName=SystemRulestring}"/>
+                <TextBox x:Name="SystemRulestring" TextWrapping="Wrap" Margin="20,0" MinHeight="100" MaxHeight="200" Background="#E2E1E1">
+                    <TextBox.ToolTip>
+                        <StackPanel>
+                            <TextBlock Text="Replace riles:" FontWeight="Bold"/>
+                            <Border BorderBrush="Silver" BorderThickness="0,1,0,0" Margin="0,8" />
+                            <TextBlock Text="replace parts of string by new(x=y: x->y)" Margin="10,0"/>
+                            <Border BorderBrush="Silver" BorderThickness="0,1,0,0" Margin="0,8" />
+                        </StackPanel>
+                    </TextBox.ToolTip>
+                </TextBox>
+                <Label Content="Rotate angle" Target="{Binding ElementName=RotateAngle}"/>
+                <TextBox x:Name="RotateAngle" Margin="20,0" Background="#E2E1E1" Text="0" TextAlignment="Right"/>
+                <Label Content="System step _count" Target="{Binding ElementName=SystemStepCount}"/>
+                <xctk:IntegerUpDown x:Name="SystemStepCount" Increment="1" Value="0" Margin="20,0" Background="#E2E1E1" Maximum="50" Minimum="0"/>
+                <Button  x:Name="DrawFractal" Margin="20,30" Content="Draw" Background="#E2E1E1" Click="DrawFractal_Click"/>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Window>
