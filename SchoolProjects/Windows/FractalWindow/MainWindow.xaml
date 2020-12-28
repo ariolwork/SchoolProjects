@@ -55,10 +55,7 @@
                 <ColumnDefinition Width="200"/>
             </Grid.ColumnDefinitions>
 
-            <Image Grid.Column="0" Name="FractalImagePanel">
-                <Image.Source>
-                    http://cdn1.iconfinder.com/data/icons/fatcow/16/bullet_blue.png
-                </Image.Source>
+            <Image Grid.Column="0" Name="FractalImagePanel" Stretch="Uniform">
             </Image>
 
             <Border Grid.Column="1" Width="3" Height="180" Background="#E2E1E1"/>
@@ -69,16 +66,34 @@
                 
                 <!-- Wrap in panel when another fractal tpewill be added-->
                 <Label Content="_System start string" Target="{Binding ElementName=SystemStartString}"/>
-                <TextBox 
-                    x:Name="SystemStartString" 
-                    TextWrapping="NoWrap" 
-                    Margin="20,0" 
-                    Background="#E2E1E1"/>
-                
+                <TextBox x:Name="SystemStartString" TextWrapping="NoWrap" Margin="20,0" Background="#E2E1E1">
+                    <TextBox.ToolTip>
+                        <StackPanel>
+                            <TextBlock Text="Use current symbols to describestart figure:" FontWeight="Bold"/>
+                            <Border BorderBrush="Silver" BorderThickness="0,1,0,0" Margin="0,8" />
+                            <TextBlock Text="- F - draw line by angle" Margin="10,0"/>
+                            <TextBlock Text="- +/- - rotate at angle from current" Margin="10,0"/>
+                            <Border BorderBrush="Silver" BorderThickness="0,1,0,0" Margin="0,8" />
+                        </StackPanel>
+                    </TextBox.ToolTip>
+                </TextBox>
+
                 <Label Content="System _rules string" Target="{Binding ElementName=SystemRulestring}"/>
-                <TextBox x:Name="SystemRulestring" TextWrapping="Wrap" Margin="20,0" MinHeight="100" MaxHeight="200" Background="#E2E1E1"/>
+                <TextBox x:Name="SystemRulestring" TextWrapping="Wrap" Margin="20,0" MinHeight="100" MaxHeight="200" Background="#E2E1E1">
+                    <TextBox.ToolTip>
+                        <StackPanel>
+                            <TextBlock Text="Replace riles:" FontWeight="Bold"/>
+                            <Border BorderBrush="Silver" BorderThickness="0,1,0,0" Margin="0,8" />
+                            <TextBlock Text="replace parts of string by new(x=y: x->y)" Margin="10,0"/>
+                            <Border BorderBrush="Silver" BorderThickness="0,1,0,0" Margin="0,8" />
+                        </StackPanel>
+                    </TextBox.ToolTip>
+                </TextBox>
+                <Label Content="Rotate angle" Target="{Binding ElementName=RotateAngle}"/>
+                <TextBox x:Name="RotateAngle" Margin="20,0" Background="#E2E1E1" Text="0" TextAlignment="Right"/>
                 <Label Content="System step _count" Target="{Binding ElementName=SystemStepCount}"/>
                 <xctk:IntegerUpDown x:Name="SystemStepCount" Increment="1" Value="0" Margin="20,0" Background="#E2E1E1" Maximum="50" Minimum="0"/>
+                <Button  x:Name="DrawFractal" Margin="20,30" Content="Draw" Background="#E2E1E1" Click="DrawFractal_Click"/>
             </StackPanel>
         </Grid>
     </Grid>

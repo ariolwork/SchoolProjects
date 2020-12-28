@@ -1,0 +1,74 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Controls;
+using System.Windows.Media.Imaging;
+
+namespace FractalWindow.Painter
+{
+    public static class _2DPainter
+    {
+        public static BitmapImage Draw2DPoints(IReadOnlyList<PointF> points, int height = 10000, int width= 10000)
+        {
+            var bitmap = new Bitmap(width, height);
+
+            if (points == null || points.Count == 0)
+            {
+                return BmpImageFromBmp(bitmap);
+            }
+
+
+            var xpoint = points.Select(x => x.X);
+            var ypoint = points.Select(x => x.Y);
+            var zoomheight = height * 0.92;
+            var zoomwidth = width * 0.92;
+            double xzoom = (double)zoomwidth / ZeroToOneOnly(xpoint.Max() - xpoint.Min());
+            double yzoom = (double)zoomheight / ZeroToOneOnly(ypoint.Max() - ypoint.Min());
+            var zoom = xzoom < yzoom ? xzoom : yzoom;
+            var zoomPoints = points.Select(p => new PointF((float)(p.X * zoom), (float)(p.Y*zoom))).ToList();
+            var newPoint = zoomPoints.Select(p => new Point(
+                (int)((double)p.X + width / 2), 
+                (int)((double)p.Y + height / 2))).ToList();
+            using (Graphics g = Graphics.FromImage(bitmap))
+            {
+                g.Clear(Color.White);
+                for(int i = 0; i < newPoint.Count - 1; i++)
+                {
+                    var from = newPoint[i];
+                    var to = newPoint[i+1];
+                    g.DrawLine(new Pen(Color.Black, width/100), from, to);
+                }
+            }
+            return BmpImageFromBmp(bitmap);
+        }
+
+        private static double ZeroToOneOnly(double val)
+        {
+            if (val <= 0.0000001 && val >= -0.0000001)
+            {
+                return 1;
+            }
+            else return val;
+        }
+
+        private static BitmapImage BmpImageFromBmp(Bitmap bmp)
+        {
+            using (var memory = new System.IO.MemoryStream())
+            {
+                bmp.Save(memory, System.Drawing.Imaging.ImageFormat.Png);
+                memory.Position = 0;
+
+                var bitmapImage = new BitmapImage();
+                bitmapImage.BeginInit();
+                bitmapImage.StreamSource = memory;
+                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                bitmapImage.EndInit();
+                bitmapImage.Freeze();
+
+                return bitmapImage;
+            }
+        }
+    }
+}

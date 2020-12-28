@@ -13,8 +13,7 @@ namespace Extensions.SystemExt.MathExt
         }
 
         public static IReadOnlyList<PointF> CenterlizePoints(
-            IReadOnlyList<PointF> points, 
-            double maxDiff = double.MaxValue)
+            IReadOnlyList<PointF> points)
         {
             var maxX = double.MinValue;
             var maxY = double.MinValue;
@@ -27,21 +26,25 @@ namespace Extensions.SystemExt.MathExt
                 minX = minX > point.X ? point.X : minX;
                 minY = minY > point.Y ? point.Y : minY;
             });
-            double proporcialX = (maxX - minX) / maxDiff;
-            double proporcialY = (maxY - minY) / maxDiff;
-            double proporcial = (proporcialX > proporcialY ? proporcialX : proporcialY);
             
-            //main move parameters
-            proporcial = proporcial > 1 ? proporcial : 1;
             double moveX = (maxX - minX) / 2;
+            if ((moveX < 0 && maxX <= 0) || (moveX > 0 && minX >= 0))
+            {
+                moveX *= -1;
+            }
+
             double moveY = (maxY - minY) / 2;
+            if ((moveY < 0 && maxY <= 0) || (moveY > 0 && minY >= 0))
+            {
+                moveY *= -1;
+            }
 
             return points.Select(p =>
             {
                 return new PointF
                 (
-                    x: (float)((p.X * proporcial) - moveX),
-                    y: (float)((p.Y * proporcial) - moveY)
+                    x: (float)(p.X + moveX),
+                    y: (float)(p.Y + moveY)
                 );
             });
         }
