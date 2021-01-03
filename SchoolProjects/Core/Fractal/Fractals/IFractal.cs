@@ -9,9 +9,6 @@ namespace Fractal.Fractals
     public interface IFractal
     {
         [NotNull, ItemNotNull]
-        public IReadOnlyList<PointF> Points(
-            int stepCount,
-            double zoom,
-            PointF centerPoint);
+        public IReadOnlyList<PointF> Points(int stepCount);
     }
 }

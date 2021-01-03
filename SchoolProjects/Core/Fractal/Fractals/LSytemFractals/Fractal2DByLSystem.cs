@@ -30,34 +30,22 @@ namespace Fractal.Fractals.LSytemFractals
             _state = null;
         }
 
-        public IReadOnlyList<PointF> Points(
-            int stepCount,
-            double zoom,
-            PointF centerPoint)
+        public IReadOnlyList<PointF> Points(int stepCount)
         {
             IReadOnlyList<PointF> points;
             if (_state == null || stepCount != _state.StepCount)
             {
                 points = GetNewPoints(stepCount);
-                _state = new _2SLSystemState(stepCount, 1, new PointF(0, 0), points);
+                _state = new _2SLSystemState(stepCount, points);
             }
 
             points = _state.Points;
-            if (_state.Equals(stepCount, zoom, centerPoint))
+            if (_state.Equals(stepCount))
             {
                 return points;
             }
 
-            points = points.Select(point =>
-            {
-                return new PointF
-                (
-                    x: (float)((point.X - _state.Center.X + centerPoint.X) * zoom),
-                    y: (float)((point.Y - _state.Center.Y + centerPoint.Y) * zoom)
-                );
-            });
-
-            _state = new _2SLSystemState(stepCount, zoom, centerPoint, points);
+            _state = new _2SLSystemState(stepCount, points);
             return points;
         }
 

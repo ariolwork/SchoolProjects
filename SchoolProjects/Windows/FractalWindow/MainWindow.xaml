@@ -79,7 +79,7 @@
                 </TextBox>
 
                 <Label Content="System _rules string" Target="{Binding ElementName=SystemRulestring}"/>
-                <TextBox x:Name="SystemRulestring" TextWrapping="Wrap" Margin="20,0" MinHeight="100" MaxHeight="200" Background="#E2E1E1">
+                <TextBox x:Name="SystemRulestring" TextWrapping="Wrap" AcceptsReturn="True" Margin="20,0" MinHeight="100" MaxHeight="200" Background="#E2E1E1">
                     <TextBox.ToolTip>
                         <StackPanel>
                             <TextBlock Text="Replace riles:" FontWeight="Bold"/>
