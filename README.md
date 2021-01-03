@@ -1,1 +1,1 @@
-MuSchoolProjects
+MySchoolProjects
