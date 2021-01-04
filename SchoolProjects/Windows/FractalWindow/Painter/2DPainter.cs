@@ -20,17 +20,18 @@ namespace FractalWindow.Painter
             }
 
 
-            var xpoint = points.Select(x => x.X);
-            var ypoint = points.Select(x => x.Y);
             var zoomheight = height * 0.92;
             var zoomwidth = width * 0.92;
-            double xzoom = (double)zoomwidth / ZeroToOneOnly(xpoint.Max() - xpoint.Min());
-            double yzoom = (double)zoomheight / ZeroToOneOnly(ypoint.Max() - ypoint.Min());
+
+            var xMax = points.Select(x => x.X).Max();
+            var yMax = points.Select(x => x.Y).Max();
+            var xzoom = zoomwidth / ZeroToOneOnly(xMax);
+            var yzoom = zoomheight / ZeroToOneOnly(yMax);
             var zoom = xzoom < yzoom ? xzoom : yzoom;
             var zoomPoints = points.Select(p => new PointF((float)(p.X * zoom), (float)(p.Y*zoom))).ToList();
             var newPoint = zoomPoints.Select(p => new Point(
-                (int)((double)p.X + width / 2), 
-                (int)((double)p.Y + height / 2))).ToList();
+                (int)(p.X + width * 0.04),
+                (int)(p.Y + height * 0.04))).ToList();
             using (Graphics g = Graphics.FromImage(bitmap))
             {
                 g.Clear(Color.White);
@@ -38,7 +39,7 @@ namespace FractalWindow.Painter
                 {
                     var from = newPoint[i];
                     var to = newPoint[i+1];
-                    g.DrawLine(new Pen(Color.Black, width/100), from, to);
+                    g.DrawLine(new Pen(Color.Black, 30), from, to);
                 }
             }
             return BmpImageFromBmp(bitmap);

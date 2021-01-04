@@ -54,7 +54,7 @@ namespace Fractal.Fractals.LSytemFractals
             int stepCount)
         {
             var condition = GetNewCondition(stepCount);
-            return GeometricExtensions.CenterlizePoints(
+            return GeometricExtensions.MovePointsToZero(
                 GetPoints(condition));
         }
 
