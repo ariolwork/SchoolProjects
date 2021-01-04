@@ -4,20 +4,9 @@ using FractalWindow.Handlers.Initializers;
 using FractalWindow.Painter;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace FractalWindow
 {
@@ -27,6 +16,7 @@ namespace FractalWindow
     public partial class FractalWindowEvents : Window
     {
         BaseValidation _baseValidation = new BaseValidation();
+        FractaKeeper _fractaKeeper = new FractaKeeper();
 
         public FractalWindowEvents()
         {
@@ -61,13 +51,11 @@ namespace FractalWindow
 
         private void DrawFractal_Click(object sender, RoutedEventArgs e)
         {
-            var fractal = FractalBuilder.Get2DLSystemFractal(
+            var bitmap = _fractaKeeper.BuildNewFractal(
                 startSystemСondition: SystemStartString.Text,
-                rotateAngle: int.Parse(RotateAngle.Text),
-                generativeRules: SystemRulestring.Text);
-            var points = fractal.Points(
-                stepCount: int.Parse(SystemStepCount.Text));
-            var bitmap = _2DPainter.Draw2DPoints(points);
+                rotateAngle: RotateAngle.Text,
+                generativeRules: SystemRulestring.Text,
+                systemStepCount: SystemStepCount.Text);
             FractalImagePanel.Source = bitmap;
         }
     }
