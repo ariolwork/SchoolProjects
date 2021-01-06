@@ -25,18 +25,9 @@
                         </StackPanel>
                     </MenuItem.Header>
 
-                    <MenuItem Name="SaveImageButton" Header="Save Image"/>
-                    <MenuItem Name="SaveAsFileButton" Header="Save"/>
+                    <MenuItem Name="SaveImageButton" Header="Save Image" Click="SaveImageButton_Click"/>
+                    <MenuItem Name="SaveAsFileButton" Header="Save" Click="SaveAsFileButton_Click"/>
 
-                </MenuItem>
-
-                <MenuItem Name="OpenFileButton">
-                    <MenuItem.Header>
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="http://cdn1.iconfinder.com/data/icons/fatcow/16/bullet_blue.png" Stretch="Uniform"/>
-                            <TextBlock Margin="5,0">Open</TextBlock>
-                        </StackPanel>
-                    </MenuItem.Header>
                 </MenuItem>
             </Menu>
             <Separator Margin="5,4"/>

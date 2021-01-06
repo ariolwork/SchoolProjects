@@ -1,22 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Windows.Controls;
-using System.Windows.Media.Imaging;
 
 namespace FractalWindow.Painter
 {
     public static class _2DPainter
     {
-        public static BitmapImage Draw2DPoints(IReadOnlyList<PointF> points, int height = 10000, int width= 10000)
+        public static Bitmap Draw2DPoints(IReadOnlyList<PointF> points, int height = 10000, int width= 10000)
         {
             var bitmap = new Bitmap(width, height);
 
             if (points == null || points.Count == 0)
             {
-                return BmpImageFromBmp(bitmap);
+                return bitmap;
             }
 
 
@@ -42,7 +38,7 @@ namespace FractalWindow.Painter
                     g.DrawLine(new Pen(Color.Black, 30), from, to);
                 }
             }
-            return BmpImageFromBmp(bitmap);
+            return bitmap;
         }
 
         private static double ZeroToOneOnly(double val)
@@ -52,24 +48,6 @@ namespace FractalWindow.Painter
                 return 1;
             }
             else return val;
-        }
-
-        private static BitmapImage BmpImageFromBmp(Bitmap bmp)
-        {
-            using (var memory = new System.IO.MemoryStream())
-            {
-                bmp.Save(memory, System.Drawing.Imaging.ImageFormat.Png);
-                memory.Position = 0;
-
-                var bitmapImage = new BitmapImage();
-                bitmapImage.BeginInit();
-                bitmapImage.StreamSource = memory;
-                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
-                bitmapImage.EndInit();
-                bitmapImage.Freeze();
-
-                return bitmapImage;
-            }
         }
     }
 }

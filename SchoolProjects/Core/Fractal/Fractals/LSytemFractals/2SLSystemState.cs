@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace Fractal.Fractals.LSytemFractals
@@ -21,9 +22,9 @@ namespace Fractal.Fractals.LSytemFractals
             return stepCount == StepCount;
         }
 
-        public int StepCount { get; }
+        public int StepCount;
 
         [NotNull, ItemNotNull]
-        public IReadOnlyList<PointF> Points { get; }
+        public IReadOnlyList<PointF> Points;
     }
 }

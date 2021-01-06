@@ -58,5 +58,15 @@ namespace FractalWindow
                 systemStepCount: SystemStepCount.Text);
             FractalImagePanel.Source = bitmap;
         }
+
+        private void SaveImageButton_Click(object sender, RoutedEventArgs e)
+        {
+            _fractaKeeper.SaveFracatlBitmapImage();
+        }
+
+        private void SaveAsFileButton_Click(object sender, RoutedEventArgs e)
+        {
+            _fractaKeeper.SaveFracatItemToJsonFile();
+        }
     }
 }

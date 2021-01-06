@@ -6,17 +6,16 @@ using System.Text;
 using Extensions.SystemExt.CollectionsExt;
 using Extensions.SystemExt.DrawingExt;
 using Extensions.SystemExt.MathExt;
+using System.Runtime.Serialization;
 
 namespace Fractal.Fractals.LSytemFractals
 {
     public sealed class Fractal2DByLSystem : IFractal
     {
         private const double StandartPixeMove = 1000;
-
         private readonly string _startSystemСondition;
         private readonly double _rotateAngle;
         private readonly IReadOnlyList<GenerativeRules> _generativeRules;
-
         private _2SLSystemState _state;
 
         public Fractal2DByLSystem(
