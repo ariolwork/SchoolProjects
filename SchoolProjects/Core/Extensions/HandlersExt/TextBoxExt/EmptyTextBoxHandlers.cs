@@ -38,7 +38,7 @@ namespace Extensions.HandlersExt.TextBoxExt
             return (object sender, RoutedEventArgs e) =>
             {
                 TextBox textBox = sender as TextBox;
-                if (textBox.Text  == text)
+                if (textBox.Text == text)
                 {
                     textBox.Text = string.Empty;
                 }
