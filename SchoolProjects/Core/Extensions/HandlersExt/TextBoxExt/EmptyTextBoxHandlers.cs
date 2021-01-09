@@ -31,7 +31,6 @@ namespace Extensions.HandlersExt.TextBoxExt
                 }
             };
         }
-
         public static RoutedEventHandler GetEmptyTextBoxHelpStringGetFocusHandler(string text)
         {
             text = HelpPrefix + text;
