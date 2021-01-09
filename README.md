@@ -1,4 +1,4 @@
-So. Some days ago i found mmy old school projects and decided to rewrite them with some code improvements. 
+So. Some days ago i found mmy old school projects and decided to rewrite some them with code improvements. 
 # MySchoolProjects
 ## Fractals
 Using [Lévy C curve](https://en.wikipedia.org/wiki/L%C3%A9vy_C_curve) L-system we draw differents fractals...
