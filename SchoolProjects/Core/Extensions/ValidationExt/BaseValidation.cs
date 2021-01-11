@@ -40,7 +40,7 @@ namespace Extensions.ValidationExt
 
         public bool GetFullValidationStatus()
         {
-            return _elementValidation.Values.Select(e => e == false).Any();
+            return _elementValidation.Values.Where(e => !e).Count() == 0;
         }
     }
 }
