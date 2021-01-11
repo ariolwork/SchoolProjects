@@ -20,7 +20,6 @@
                 <MenuItem Name="MainMenuSaveButton">
                     <MenuItem.Header>
                         <StackPanel Orientation="Horizontal">
-                            <Image Source="http://cdn1.iconfinder.com/data/icons/fatcow/16/bullet_blue.png" Stretch="Uniform"/>
                             <TextBlock Margin="5,0">Save</TextBlock>
                         </StackPanel>
                     </MenuItem.Header>

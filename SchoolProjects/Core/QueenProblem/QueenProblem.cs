@@ -7,12 +7,12 @@ namespace QueenProblem
 {
     public static class QueenProblem
     {
-        public static List<List<Point>> SolveProblem(int boardSize)
+        public static List<List<Point>> SolveProblem(int bordSize)
         {
             var coordinates = new List<List<Point>>();
 
-            var xCoordinates = new bool[boardSize];
-            var yCoordinates = new bool[boardSize];
+            var xCoordinates = new bool[bordSize];
+            var yCoordinates = new bool[bordSize];
             GetCoordinates(
                 xLineIsFull: ref xCoordinates,
                 yLineIsFull: ref yCoordinates,
@@ -28,10 +28,11 @@ namespace QueenProblem
             List<List<Point>> points,
             List<Point> coordinates)
         {
-            if (xLineIsFull.Any(v => !v)
-                || yLineIsFull.Any(v => !v))
+            if (!(xLineIsFull.Any(v => !v)
+                || yLineIsFull.Any(v => !v)))
             {
-                points.Add(coordinates);
+                if(!points.Any(c => coordinates.All(p => c.Contains(p))))
+                    points.Add(coordinates);
             }
 
             for (var xLine = 0; xLine < xLineIsFull.Length; xLine++)
@@ -40,15 +41,18 @@ namespace QueenProblem
                     continue;
                 for (var yLine = 0; yLine < yLineIsFull.Length; yLine++)
                 {
-                    if (yLineIsFull[yLine])
+                    if (yLineIsFull[yLine] 
+                        || coordinates.Any(p => Math.Abs(p.X - xLine) == Math.Abs(p.Y - yLine)))
                         continue;
                     xLineIsFull[xLine] = true;
                     yLineIsFull[yLine] = true;
+                    var newList = new List<Point>(coordinates);
+                    newList.Add(new Point(xLine, yLine));
                     GetCoordinates(
                         ref xLineIsFull, 
                         ref yLineIsFull, 
                         points, 
-                        coordinates);
+                        newList);
                     xLineIsFull[xLine] = false;
                     yLineIsFull[yLine] = false;
                 }
